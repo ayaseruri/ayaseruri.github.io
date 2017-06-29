@@ -1,0 +1,783 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="生活,Android,编程,摄影" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="什么是注解支持 (Support Annotations)做 Android 开发的应该对 Android Support Library 并不陌生。 Android support library 从19.1版本开始引入了一个新的代码注解库。具体引入方法是:123dependencies &amp;#123;    compile &apos;com.android.support:support-annota">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 注解支持 (Android Support Annotations)">
+<meta property="og:url" content="http://ayaseruri.net/2017/06/24/Android-注解支持-Android-Support-Annotations/index.html">
+<meta property="og:site_name" content="Ayaseruri">
+<meta property="og:description" content="什么是注解支持 (Support Annotations)做 Android 开发的应该对 Android Support Library 并不陌生。 Android support library 从19.1版本开始引入了一个新的代码注解库。具体引入方法是:123dependencies &amp;#123;    compile &apos;com.android.support:support-annota">
+<meta property="og:updated_time" content="2017-06-24T01:01:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 注解支持 (Android Support Annotations)">
+<meta name="twitter:description" content="什么是注解支持 (Support Annotations)做 Android 开发的应该对 Android Support Library 并不陌生。 Android support library 从19.1版本开始引入了一个新的代码注解库。具体引入方法是:123dependencies &amp;#123;    compile &apos;com.android.support:support-annota">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Ayaseruri'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ayaseruri.net/2017/06/24/Android-注解支持-Android-Support-Annotations/"/>
+
+
+
+
+
+  <title>Android 注解支持 (Android Support Annotations) | Ayaseruri</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ayaseruri</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个简单的少年</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-photo">
+          <a href="/photo/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-camera"></i> <br />
+            
+            摄影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-create">
+          <a href="/create/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            作品
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://ayaseruri.net/2017/06/24/Android-注解支持-Android-Support-Annotations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ayaseruri">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/a79b04ecgy1fgw5110v59j21k91k9u0x.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ayaseruri">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android 注解支持 (Android Support Annotations)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-24T09:01:22+08:00">
+                2017-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><h3 id="什么是注解支持-Support-Annotations"><a href="#什么是注解支持-Support-Annotations" class="headerlink" title="什么是注解支持 (Support Annotations)"></a>什么是注解支持 (Support Annotations)</h3>做 Android 开发的应该对 Android Support Library 并不陌生。 Android support library 从19.1版本开始引入了一个新的代码注解库。具体引入方法是:<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    compile 'com.android.support:support-annotations:19.1.0'</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当然，如果你正在使用appcompat库，那么你已经可以使用这些注解了，因为appcomat它自己也依赖它。</p>
+<ul>
+<li><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3>Android Studio 已经基于这些注解校验了你的代码并且标注其中潜在的问题，Android Studio 会依据注解进行实时提示。 Support Annotations 可以修饰代码，帮助你或者别人发现bug，节约多人开发的沟通成本。</li>
+<li><h3 id="常用-Support-Annotations"><a href="#常用-Support-Annotations" class="headerlink" title="常用 Support Annotations"></a>常用 Support Annotations</h3><ul>
+<li><h4 id="NullXX-空指针检测"><a href="#NullXX-空指针检测" class="headerlink" title="NullXX 空指针检测"></a>NullXX 空指针检测</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Nullable</span> <span class="comment">//给定的参数或者返回值可以为null。</span></div><div class="line"><span class="meta">@NonNull</span>  <span class="comment">//给定的参数或者返回值不能为null。</span></div></pre></td></tr></table></figure>
+<p>例如在 Android 源码 AppCompatActivity 类里面：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">	……</div><div class="line">&#125;</div><div class="line">……</div><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">       <span class="keyword">super</span>.onPostCreate(savedInstanceState);</div><div class="line">       getDelegate().onPostCreate(savedInstanceState);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>需要注意的是，此注解使用需要注意时机，在对人们对判空达成『共识』的地方我们可以适当省略，以免 IDE 大量提示造成不必要的困扰，例如 Android 源码中这一段就省略了返回值的 @Nullable ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="meta">@Nullable</span>(被省略)</div><div class="line">   <span class="function"><span class="keyword">public</span> View <span class="title">findViewById</span><span class="params">(@IdRes <span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">       <span class="keyword">return</span> getDelegate().findViewById(id);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>同样的，在合适的地方使用此类注释可以大量的减少不必要的类如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">null</span> != getSomething()) &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>的判空，想想看自己以前写过的代码，是不是有很多地方可以加上此类注释。</p>
+</li>
+<li><h4 id="XXXRes-资源类"><a href="#XXXRes-资源类" class="headerlink" title="XXXRes 资源类"></a>XXXRes 资源类</h4><p>因为 Android 的资源类型通常都是使用资源 ID 进行传递的，所以有时候我们会产生疑惑，例如下面这段代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(<span class="keyword">int</span> color)</span></span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在使用过程中，上段代码应该 <code>setColor(R.color.red)</code> 还是应该 <code>setColor(Color.RED)</code> 呢？<br>与资源相关的注释有： <code>@StringRes, @DrawableRes, @ColorRes, @ColorInt, @InterpolatorRes</code> 顾名思义，我们可以直接把他们用到相应的地方。例如上段代码，如果我们希望用户这样使用 <code>setColor(R.color.red)</code> ,那么我们就可以这样写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(@ColorRes <span class="keyword">int</span> color)</span></span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果是 <code>setColor(Color.RED)</code>,可以这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(@ColorInt <span class="keyword">int</span> color)</span></span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><h4 id="IntDef-StringDef-类型定义注解"><a href="#IntDef-StringDef-类型定义注解" class="headerlink" title="IntDef/StringDef: 类型定义注解"></a>IntDef/StringDef: 类型定义注解</h4><p>当我们的返回值或者参数指定了可用的 int 或者 string 常量值时我们可以使用上述注解，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToastUtils</span> </span>&#123;</div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TOAST_ALERT = <span class="number">0</span>;</div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TOAST_INFO = <span class="number">1</span>;</div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TOAST_CONFIRM = <span class="number">2</span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showTost</span><span class="params">(@ToastType <span class="keyword">int</span> type)</span></span>&#123;</div><div class="line">&#125;</div><div class="line"><span class="meta">@ToastType</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getToastType</span><span class="params">()</span></span>&#123;</div><div class="line">&#125;</div><div class="line"><span class="meta">@IntDef</span>(&#123;TOAST_INFO, TOAST_ALERT, TOAST_CONFIRM&#125;)</div><div class="line">   <span class="meta">@Retention</span>(RetentionPolicy.SOURCE)</div><div class="line">   <span class="keyword">public</span> <span class="meta">@interface</span> ToastType&#123;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于上述情况，如果我们需要使用位运算( |, &amp;, ^ 等)，可以这样定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@IntDef</span>(flag=<span class="keyword">true</span>, value=&#123;TOAST_INFO, TOAST_ALERT, TOAST_CONFIRM&#125;)</div><div class="line">   <span class="meta">@Retention</span>(RetentionPolicy.SOURCE)</div><div class="line">   <span class="keyword">public</span> <span class="meta">@interface</span> ToastType&#123;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>@Retention 表示当前 @IntDef 的保留策略，可以使用如下几个值：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RetentionPolicy.SOURCE  //只保留源码中，编译时删除</div><div class="line">RetentionPolicy.CLASS   //编译时被保留,在class文件中存在,但JVM将会忽略</div><div class="line">RetentionPolicy.RUNTIME //将被JVM保留,所以他们能在运行时被JVM或其他使用反射机制的代码所读取和使用</div></pre></td></tr></table></figure>
+<p>绝大部分时候我们只需要使用 <code>RetentionPolicy.SOURCE</code> 仅作为 IDE 提示的依据。</p>
+</li>
+<li><h4 id="XXXThread-线程类"><a href="#XXXThread-线程类" class="headerlink" title="XXXThread 线程类"></a>XXXThread 线程类</h4><p>这个很有用，很多时候我们希望自己的方法在指定类型线程中运行，例如进行 UI 操作的时候，我们希望操作能在主线程中进行。需要注意的是，在实际使用过程中 IDE 并不能智能的检测运行时代码块所处的线程，一般来说当方法标记为 <code>@WorkerThread</code> 时，在其代码块儿中我们调用了被标记为 <code>@UiThread</code>的方法，此时 IDE 会明确提示问题，所以推测 IDE 应该是依据标记来判断代码块的运行线程，只有当标记冲突的时候才会进行提示。<br><code>@XXXThread</code> 被标注的方法应该只能在 XXX 线程中被调用。如果它被用来标记类，那么表示此类中所有的方法只能在 XXX 线程中调用，相关的注解有以下几个：<br><code>@UiThread，@MainThread，@WorkerThread，@BinderThread</code><br>例如 Android 源码中对 View 类的声明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">	<span class="meta">@UiThread</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">View</span> <span class="keyword">implements</span> <span class="title">Drawable</span>.<span class="title">Callback</span>, <span class="title">KeyEvent</span>.<span class="title">Callback</span>,<span class="title">AccessibilityEventSource</span> </span>&#123;</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
+<p><code>@MainThread</code> 和 <code>@UiThread</code> 的定义完全一样，但是由于 <code>MainThread</code> 本质上是一个 <code>UiThread</code>，而大部分情况下 <code>UiThread</code> 又是一个 <code>MainThread</code> ，所以一般来说我们把和生命周期相关的用 <code>@MainThread</code>  标注，和 <code>View</code> 相关的用 <code>@UiThread</code> 标注。</p>
+</li>
+<li><h4 id="数值约束"><a href="#数值约束" class="headerlink" title="数值约束"></a>数值约束</h4><p>在有的 API 中 透明度（Alpha）的取值范围是 0~255 ，而有的是 0~1。为了解决这个问题我们可以使用类似 <code>@Size, @IntRange, @FloatRange</code>的注解，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAlpha</span><span class="params">(@IntRange(from=<span class="number">0</span>,to=<span class="number">255</span>)</span> <span class="keyword">int</span> alpha) </span>&#123; … &#125;	<span class="comment">// 表明Alpha 大于等于0，小于等于255。</span></div></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAlpha</span><span class="params">(@FloatRange(from=<span class="number">0.0</span>,to=<span class="number">1.0</span>)</span> <span class="keyword">int</span> alpha) </span>&#123; … &#125;</div></pre></td></tr></table></figure>
+<p><code>@Size</code> 我们会这样使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">集合不能为空: <span class="meta">@Size</span>(min=<span class="number">1</span>)</div><div class="line">字符串最大只能有<span class="number">23</span>个字符: <span class="meta">@Size</span>(max=<span class="number">23</span>)</div><div class="line">数组只能有<span class="number">2</span>个元素: <span class="meta">@Size</span>(<span class="number">2</span>)</div><div class="line">数组的大小必须是<span class="number">2</span>的倍数 (例如图形API中获取位置的x/y坐标数组: <span class="meta">@Size</span>(multiple=<span class="number">2</span>)</div></pre></td></tr></table></figure>
+</li>
+<li><h4 id="RequiresPermission-权限注解"><a href="#RequiresPermission-权限注解" class="headerlink" title="RequiresPermission 权限注解"></a>RequiresPermission 权限注解</h4><p>我在使用某些例如写入文件，定位库的时候有时候会感到疑惑：库方法本身是否已经对权限做了处理呢。这里 <code>RequiresPermission</code> 就可以有效解决这个问题。<br>如果你的方法的调用需要调用者有特定的权限，你可以使用 <code>@RequiresPermission</code> 注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequiresPermission</span>(Manifest.permission.SET_WALLPAPER)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">setWallpaper</span><span class="params">(Bitmap bitmap)</span> <span class="keyword">throws</span> IOException</span>;</div></pre></td></tr></table></figure>
+<p>如果你至少需要权限集合中的一个，你可以使用anyOf属性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequiresPermission</span>(anyOf = &#123;</div><div class="line">   Manifest.permission.ACCESS_COARSE_LOCATION,</div><div class="line">   Manifest.permission.ACCESS_FINE_LOCATION&#125;)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Location <span class="title">getLastKnownLocation</span><span class="params">(String provider)</span></span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>如果你同时需要多个权限，你可以用allOf属性：<br>    <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequiresPermission</span>(allOf = &#123;</div><div class="line">   Manifest.permission.READ_HISTORY_BOOKMARKS,</div><div class="line"> 	Manifest.permission.WRITE_HISTORY_BOOKMARKS&#125;)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">updateVisitedHistory</span><span class="params">(ContentResolver cr, String url, <span class="keyword">boolean</span> real)</span> </span>&#123;</div></pre></td></tr></table></figure></p>
+<pre><code>对于intents的权限，可以直接在定义的intent常量字符串字段上标注权限需求(它们通常都已经被`@SdkConstant` 注解标注过了):
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequiresPermission</span>(android.Manifest.permission.BLUETOOTH)</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ACTION_REQUEST_DISCOVERABLE =    <span class="string">"android.bluetooth.adapter.action.REQUEST_DISCOVERABLE"</span>;</div></pre></td></tr></table></figure>
+
+对于content providers的权限，你可能需要单独的标注读和写的权限访问，所以可以用@Read或者@Write标注每一个权限需求：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequiresPermission</span>.Read(<span class="meta">@RequiresPermission</span>(READ_HISTORY_BOOKMARKS))</div><div class="line"><span class="meta">@RequiresPermission</span>.Write(<span class="meta">@RequiresPermission</span>(WRITE_HISTORY_BOOKMARKS))</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Uri BOOKMARKS_URI = Uri.parse(<span class="string">"content://browser/bookmarks"</span>);</div></pre></td></tr></table></figure>
+
+- #### 方法重写 CallSuper
+如果你的API允许使用者重写你的方法，但是呢，你又需要你自己的方法(父方法)在重写的时候也被调用，这个时候需要用到 `@CallSuper`，例如：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@CallSuper</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+- #### 检查返回值 CheckResult
+我们有时候回忽略一些方法的返回值，比如 `        File#mkdir()` 如果你希望方法使用者不要忽略了方法的返回值，就可以用到 `@CheckResult`
+- #### Keep 防止混淆
+`@Keep` 可以用在方法，变量和类上，用于标记对应的代码块不被混淆，例如：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//防止混淆类</span></div><div class="line"><span class="meta">@Keep</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;&#125;</div><div class="line"><span class="comment">//防止混淆变量</span></div><div class="line"><span class="meta">@Keep</span></div><div class="line"><span class="keyword">public</span> String name;</div><div class="line"><span class="comment">//防止混淆方法</span></div><div class="line"><span class="meta">@Keep</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;&#125;</div></pre></td></tr></table></figure>
+
+但是有时候你会发现 `@Keep` 注释并没有生效，原因是 Gradle 插件的支持问题（目前应该已经被支持），这个时候我们可以手动在 `progurad-rules.pro` 加入如下代码手动开启：
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">	#手动启用support keep注解</div><div class="line">	#http://tools.android.com/tech-docs/support-    annotations</div><div class="line">	-dontskipnonpubliclibraryclassmembers</div><div class="line">	-printconfiguration</div><div class="line">	-keep,allowobfuscation @interface         android.support.annotation.Keep</div><div class="line">	-keep @android.support.annotation.Keep class *</div><div class="line">	-keepclassmembers class * &#123;</div><div class="line">    @android.support.annotation.Keep *;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/24/你可能遇到了假的单例模式/" rel="next" title="你可能遇到了假的单例模式">
+                <i class="fa fa-chevron-left"></i> 你可能遇到了假的单例模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/24/没事抖个机灵-RD-和-PM-的日常/" rel="prev" title="没事抖个机灵 RD 和 PM 的日常">
+                没事抖个机灵 RD 和 PM 的日常 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/a79b04ecgy1fgw5110v59j21k91k9u0x.jpg"
+               alt="Ayaseruri" />
+          <p class="site-author-name" itemprop="name">Ayaseruri</p>
+           
+              <p class="site-description motion-element" itemprop="description">一个少年，想要拥抱这宇宙的闪耀并创造奇迹。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayaseruri/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/ayaseruri233" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://vscam.co/#!u/ayaseruri" target="_blank" title="Vscam">
+                  
+                    <i class="fa fa-fw fa-camera"></i>
+                  
+                  Vscam
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是注解支持-Support-Annotations"><span class="nav-number">1.</span> <span class="nav-text">什么是注解支持 (Support Annotations)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">2.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用-Support-Annotations"><span class="nav-number">3.</span> <span class="nav-text">常用 Support Annotations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NullXX-空指针检测"><span class="nav-number">3.1.</span> <span class="nav-text">NullXX 空指针检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XXXRes-资源类"><span class="nav-number">3.2.</span> <span class="nav-text">XXXRes 资源类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IntDef-StringDef-类型定义注解"><span class="nav-number">3.3.</span> <span class="nav-text">IntDef/StringDef: 类型定义注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XXXThread-线程类"><span class="nav-number">3.4.</span> <span class="nav-text">XXXThread 线程类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数值约束"><span class="nav-number">3.5.</span> <span class="nav-text">数值约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RequiresPermission-权限注解"><span class="nav-number">3.6.</span> <span class="nav-text">RequiresPermission 权限注解</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ayaseruri</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

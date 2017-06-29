@@ -1,0 +1,752 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="生活,Android,编程,摄影" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="WebP 是什么：  体积越来越小，画质越来越好一直都是我们对图片文件的追求， WebP 便是在这种追求趋势下由 Google 在前几年提出的一种图片压缩存储方式，项目主页是：Google WebP  同样的 Google 在 2014 开发者大会上的介绍了 WebP 的一些使用：         WebP 优势是什么： 在肉眼画质几乎不变的情况下，体积大幅度减小  相比于PNG，无损压缩的We">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一种全新的图片格式 WebP">
+<meta property="og:url" content="http://ayaseruri.net/2017/06/24/一种全新的图片格式-WebP/index.html">
+<meta property="og:site_name" content="Ayaseruri">
+<meta property="og:description" content="WebP 是什么：  体积越来越小，画质越来越好一直都是我们对图片文件的追求， WebP 便是在这种追求趋势下由 Google 在前几年提出的一种图片压缩存储方式，项目主页是：Google WebP  同样的 Google 在 2014 开发者大会上的介绍了 WebP 的一些使用：         WebP 优势是什么： 在肉眼画质几乎不变的情况下，体积大幅度减小  相比于PNG，无损压缩的We">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/a79b04ecgy1feblgxova5j20fs0eiae6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/a79b04ecgy1feblt3g9idj20fs0eoaei.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/a79b04ecgy1fed16r6gchj21g80famyv.jpg">
+<meta property="og:updated_time" content="2017-06-24T00:59:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一种全新的图片格式 WebP">
+<meta name="twitter:description" content="WebP 是什么：  体积越来越小，画质越来越好一直都是我们对图片文件的追求， WebP 便是在这种追求趋势下由 Google 在前几年提出的一种图片压缩存储方式，项目主页是：Google WebP  同样的 Google 在 2014 开发者大会上的介绍了 WebP 的一些使用：         WebP 优势是什么： 在肉眼画质几乎不变的情况下，体积大幅度减小  相比于PNG，无损压缩的We">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/mw690/a79b04ecgy1feblgxova5j20fs0eiae6.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Ayaseruri'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ayaseruri.net/2017/06/24/一种全新的图片格式-WebP/"/>
+
+
+
+
+
+  <title>一种全新的图片格式 WebP | Ayaseruri</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ayaseruri</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个简单的少年</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-photo">
+          <a href="/photo/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-camera"></i> <br />
+            
+            摄影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-create">
+          <a href="/create/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            作品
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://ayaseruri.net/2017/06/24/一种全新的图片格式-WebP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ayaseruri">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/a79b04ecgy1fgw5110v59j21k91k9u0x.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ayaseruri">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一种全新的图片格式 WebP</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-24T08:59:01+08:00">
+                2017-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><h4 id="WebP-是什么："><a href="#WebP-是什么：" class="headerlink" title="WebP 是什么："></a>WebP 是什么：</h4><p>  体积越来越小，画质越来越好一直都是我们对图片文件的追求， WebP 便是在这种追求趋势下由 Google 在前几年提出的一种图片压缩存储方式，项目主页是：<a href="https://developers.google.com/speed/webp/" target="_blank" rel="external">Google WebP</a><br>  同样的 Google 在 2014 开发者大会上的介绍了 WebP 的一些使用：</p>
+<p>  <a href="https://www.google.com/events/io/io14videos/ff8ee9de-8af6-e311-903f-00155d5066d7" target="_blank" rel="external"><img src="http://ww1.sinaimg.cn/mw690/a79b04ecgy1feblgxova5j20fs0eiae6.jpg" width="300">    <a href="https://www.google.com/events/io/io14videos/43f7d45d-cab9-e311-b297-00155d5066d7" target="_blank" rel="external"><img src="http://ww1.sinaimg.cn/mw690/a79b04ecgy1feblt3g9idj20fs0eoaei.jpg" width="300"></a></a></p>
+</li>
+<li><h4 id="WebP-优势是什么："><a href="#WebP-优势是什么：" class="headerlink" title="WebP 优势是什么："></a>WebP 优势是什么：</h4><ul>
+<li><h5 id="在肉眼画质几乎不变的情况下，体积大幅度减小"><a href="#在肉眼画质几乎不变的情况下，体积大幅度减小" class="headerlink" title="在肉眼画质几乎不变的情况下，体积大幅度减小"></a>在肉眼画质几乎不变的情况下，体积大幅度减小</h5>  相比于PNG，无损压缩的WebP的体积会小26%，在压缩率相同的情况下，有损压缩的 WebP 比 JPG 小 25%～34%。只需要22%额外的体积，无损压缩的 WebP 便可支持透明度（ alpha 通道）。在可以接受有损 RGB 压缩的情况下，有损 WebP 同样支持透明度，这一般会比 PNG 小3倍。更加直观的测试可以看这里： <a href="https://isparta.github.io/compare-webp/index.html#12345" target="_blank" rel="external">腾讯设计团队 WebP 测试网页</a>。<a href="http://labs.qiang.it/wen/webp/compare.html" target="_blank" rel="external">压缩效果测试</a><br>   科技博客 Gig‍‍‍aOM 曾报道：YouTube 的视频略缩图采用 WebP 格式后，网页加载速度提升了 10%；谷歌的 Chrome 网上应用商店采用 WebP 格式图片后，每天可以节省几 TB 的带宽，页面平均加载时间大约减少 1/3；Google+ 移动应用采用 WebP 图片格式后，每天节省了 50TB 数据存储空间。</li>
+<li><h5 id="加载速度大幅增加："><a href="#加载速度大幅增加：" class="headerlink" title="加载速度大幅增加："></a>加载速度大幅增加：</h5>   <font color="#FF0000">在移动端上 WebP 的解码用平均高于 PNG 5倍左右</font>（数据源于<a href="https://isux.tencent.com/introduction-of-webp.html" target="_blank" rel="external">腾讯设计团队</a>）。但由于差异在毫秒以内，并且移动端加载图片主要耗时在网络图片拉取上，所以实际用户体验来看 WebP 的加载速度要明显高于 PNG。更加直观的测试我们可以看这里<a href="http://labs.qiang.it/wen/webp/test.html" target="_blank" rel="external">凹凸实验室</a>.</li>
+</ul>
+</li>
+<li><h4 id="WebP-兼容性："><a href="#WebP-兼容性：" class="headerlink" title="WebP 兼容性："></a>WebP 兼容性：</h4>  Google 旗下几乎所有产品都使用 WebP 作为其图片储存方式，国内 QQ、微信等也早就使用 WebP 进行相关产品开发。Android4.0 以上提供的原生支持（无损、透明度支持需要 Android 4.2.1 以上），其他版本以及 iOS 都可以直接使用官方提供的解析库（ <a href="https://github.com/alexey-pelykh/webp-android-backport" target="_blank" rel="external">Android</a> 、<a href="https://github.com/carsonmcdonald/WebP-iOS-example" target="_blank" rel="external">iOS</a> ）。当然在 Android 上我们还有更多的选择，比如：<a href="https://github.com/facebook/fresco/" target="_blank" rel="external">Fresco</a>。以下是 Google 提供的支持表格。<br>  <a href="https://developer.android.com/guide/topics/media/media-formats.html" target="_blank" rel="external"><img src="http://ww1.sinaimg.cn/large/a79b04ecgy1fed16r6gchj21g80famyv.jpg"></a></li>
+<li><h4 id="WebP-性能："><a href="#WebP-性能：" class="headerlink" title="WebP 性能："></a>WebP 性能：</h4><p>  因为关于 WebP 的性能讨论在网上已经有大量可寻的证据和较为固定的结论，所以这里直接引用 <a href="https://isux.tencent.com/introduction-of-webp.html" target="_blank" rel="external">腾讯设计团队</a> 在 Android QQ 上测试的结论：</p>
+<blockquote>
+<p>可见除了 WebP 在解码时间与 PNG 有较明显差异（毫秒级别）之外，总体使用体验和 PNG 基本无差异（内存、 FPS 等）– <a href="https://isux.tencent.com/introduction-of-webp.html" target="_blank" rel="external">腾讯设计团队</a></p>
+</blockquote>
+</li>
+<li><h4 id="WebP-压缩参数以及使用："><a href="#WebP-压缩参数以及使用：" class="headerlink" title="WebP 压缩参数以及使用："></a>WebP 压缩参数以及使用：</h4><p>  依据<a href="https://isux.tencent.com/introduction-of-webp.html" target="_blank" rel="external">腾讯设计团队</a>的调研结果。压缩参数说明：</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-lossless：无损压缩</div><div class="line">-q：压缩质量，值越大越图片质量越好</div><div class="line">-m：压缩方式，值越大则图片质量越好，体积越小，但是耗时较长</div></pre></td></tr></table></figure>
+<p>  可以发现，无损压缩表现很稳定，压缩质量越高，压缩效果也越好。而有损压缩在压缩质量设置为 75 以上之后，压缩效果反而减弱，甚至压缩后的图片体积会大于压缩前的体积。所以得出以下结论：</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">选择无损压缩时，“-lossless -q 100” 是最佳方案</div><div class="line">选择有损压缩时，“-q 75”是最佳方案（图片质量与体积大小达到均衡）</div><div class="line">无论何种压缩参数，加上“-m 6”都能使得输出的 WebP 图片进一步减少体积，量级是1%~2%，但是会增加耗时</div></pre></td></tr></table></figure>
+<p>  使用<a href="https://github.com/iSparta/iSparta" target="_blank" rel="external">iSparta</a>可以方便的对图片进行转换。</p>
+</li>
+<li><h4 id="动态-WebP（Animated-WebP）"><a href="#动态-WebP（Animated-WebP）" class="headerlink" title="动态 WebP（Animated WebP）"></a>动态 WebP（Animated WebP）</h4><p>  目前 Animated WebP 支持将 GIF 直接转换成 Animated WebP，或者将多张 WebP 图片组合成 Animated WebP，具有以下优势：</p>
+<ul>
+<li>支持有损和无损压缩，并且可以合并有损和无损图片帧</li>
+<li>体积更小，GIF 转成有损 Animated WebP 后可以减小 64% 的体积，转成无损可以节省 19% 的体积</li>
+<li>颜色更丰富，支持 24-bit 的 RGB 颜色以及 8-bit 的 Alpha 透明通道（而 GIF 只支持 8-bit RGB 颜色以及 1-bit 的透明）</li>
+<li><p>添加了关键帧、metadata 等数据<br>但是在国外某人提供的<a href="http://littlesvr.ca/apng/gif_apng_webp.html" target="_blank" rel="external">测试网站</a>中我们发现，在很多情况下  Animated WebP 的压缩情况并不是那么优秀，甚至出现了<a href="http://littlesvr.ca/apng/gif_apng_webp1.html" target="_blank" rel="external">画质下降同时体积反而增大的情况</a>。同样<a href="https://isux.tencent.com/introduction-of-webp.html" target="_blank" rel="external">腾讯设计团队</a>也在他们的调研中写道：</p>
+<blockquote>
+<p>根据自己实际的测试，发现 Animated WebP 的压缩效果较不稳定，在默认压缩配置下达不到 Google 官方提供的示例效果。</p>
+</blockquote>
+<p>不过在特定情况下， Animated WebP 有着自己的优势，比如这里<a href="http://www.jianshu.com/p/8dc745523e03?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="external">视频直播之webp礼物解决方案</a> 为我们提供了一种思路。</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/24/Android-AndResGuard-资源混淆/" rel="next" title="Android AndResGuard 资源混淆">
+                <i class="fa fa-chevron-left"></i> Android AndResGuard 资源混淆
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/24/2016年-Github-成绩单/" rel="prev" title="2016年 Github 成绩单">
+                2016年 Github 成绩单 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/a79b04ecgy1fgw5110v59j21k91k9u0x.jpg"
+               alt="Ayaseruri" />
+          <p class="site-author-name" itemprop="name">Ayaseruri</p>
+           
+              <p class="site-description motion-element" itemprop="description">一个少年，想要拥抱这宇宙的闪耀并创造奇迹。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayaseruri/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/ayaseruri233" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://vscam.co/#!u/ayaseruri" target="_blank" title="Vscam">
+                  
+                    <i class="fa fa-fw fa-camera"></i>
+                  
+                  Vscam
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#WebP-是什么："><span class="nav-number">1.</span> <span class="nav-text">WebP 是什么：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebP-优势是什么："><span class="nav-number">2.</span> <span class="nav-text">WebP 优势是什么：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在肉眼画质几乎不变的情况下，体积大幅度减小"><span class="nav-number">2.1.</span> <span class="nav-text">在肉眼画质几乎不变的情况下，体积大幅度减小</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载速度大幅增加："><span class="nav-number">2.2.</span> <span class="nav-text">加载速度大幅增加：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebP-兼容性："><span class="nav-number">3.</span> <span class="nav-text">WebP 兼容性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebP-性能："><span class="nav-number">4.</span> <span class="nav-text">WebP 性能：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebP-压缩参数以及使用："><span class="nav-number">5.</span> <span class="nav-text">WebP 压缩参数以及使用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态-WebP（Animated-WebP）"><span class="nav-number">6.</span> <span class="nav-text">动态 WebP（Animated WebP）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ayaseruri</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
