@@ -1520,6 +1520,13 @@ pre .javascript .function {
 .fancybox-close:hover {
   border: none;
 }
+.post-copyright {
+  margin: 2em 0 0;
+  padding: 0.5em 1em;
+  border-left: 3px solid #ff1700;
+  background-color: #f9f9f9;
+  list-style: none;
+}
 .sidebar {
   position: fixed;
   right: 0;
@@ -1677,7 +1684,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #44ff75;
+  background: #6affff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2767,4 +2774,54 @@ hr {
     width: auto;
     text-align: center;
   }
+}
+#grid {
+  margin: 40px auto;
+  position: relative;
+  padding-bottom: 40px;
+  min-height: 300px;
+  transition: width 0.3s ease;
+}
+.grid {
+  position: absolute;
+  width: 300px;
+  left: 1%;
+  top: 1%;
+  transition: left 0.3s ease, top 0.3s ease;
+}
+.co-pr {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  opacity: 0;
+  line-height: 100%;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.co-pr i {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -0.5em;
+  width: 100%;
+  text-align: center;
+  font: 800 100px/100px "PT Serif", Georgia, Times, "Times New Roman", serif;
+}
+.grid:hover .co-pr {
+  z-index: 1;
+  opacity: 0.97;
+}
+.grid .co {
+  display: block;
+  background: url("loading.gif") 50% 50% no-repeat;
+  width: 300px;
+  overflow: hidden;
+}
+.grid .co img {
+  display: block;
 }
