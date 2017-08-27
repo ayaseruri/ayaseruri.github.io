@@ -21,7 +21,7 @@
 <li>将 xml 文件拷入 Android Studio 即可像正常 drawable 资源那样使用</li>
 </ol>
 </li>
-<li><p>当 minSdkVersion 小于 Android 5.0 时<br>  <strong>方式1.</strong> gradle 默认编译的时候会把 VectorDrawable 生成相应的位图资源打包在 APP 里，如图：<br>  <img src="http://ww1.sinaimg.cn/mw690/a79b04ecgy1fdxvp5ebkej20ny0ron1i.jpg" width="350"></p>
+<li><p>当 minSdkVersion 小于 Android 5.0 时<br>  <strong>方式1.</strong> gradle 默认编译的时候会把 VectorDrawable 生成相应的位图资源打包在 APP 里，如图：<br>  <img src="https://ww1.sinaimg.cn/mw690/a79b04ecgy1fdxvp5ebkej20ny0ron1i.jpg" width="350"></p>
 <p>  我们发现系统已经帮我们生成了在不同分辨率下的对应图片，并且还有一个目录是专门针对 API 等级在21以上的提供的矢量图文件<br>  这样以来在低于21的机型上会自动使用生成的 png 图片，在高于21的机型上则使用矢量图文件<br>  但是在非常多的项目中其实并不需要如此多的分辨率图片，其实这个也是可以配置的只需要在 gradle 中进行如下配置即可：</p>
   <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">defaultConfig &#123;</div><div class="line">	vectorDrawables.generatedDensities = ['hdpi','xxhdpi']	// 只剩成 hdpi 和 xxhdpi 的图</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>  <strong>方式2.</strong> 不自动生成位图, 在 Android Support Library 23.2 中主要增加了对 VectorDrawable 与AnimateVectorDrawable 的支持。VectorDrawable 可以被兼容到 Android2.1, AnimateVectorDrawable 可以被兼容到 Android3.0。 在 gradle 中进行如下配置:</p>
@@ -43,7 +43,7 @@
 这里我也进行了测试，测试环境是：一加手机2 氧OS(基于 Android 6.0.1 )
 测试代码放到了 [Github ResTest](https://github.com/ayaseruri/ResTest)
 测试程序截图：
-&lt;img src=&quot;http://ww1.sinaimg.cn/large/a79b04ecgy1fee63hffhnj20u01hcdi3.jpg&quot; width=350/&gt;
+&lt;img src=&quot;https://ww1.sinaimg.cn/large/a79b04ecgy1fee63hffhnj20u01hcdi3.jpg&quot; width=350/&gt;
 测试方法是：将同一张图片 PNG 图片用工具分别转化成为 WebP 、SVG 然后使用如下代码进行加载：
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">long</span> startTime = System.currentTimeMillis();</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1</span>; i ++) &#123;</div><div class="line">		mImgView.setImageDrawable(getResources().getDrawable(R.drawable.img));</div><div class="line">   &#125;</div><div class="line"><span class="keyword">long</span> endTime = System.currentTimeMillis() - startTime;</div></pre></td></tr></table></figure>
 
@@ -51,7 +51,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Drawable drawable = VectorDrawableCompat.create(getResources(), R.drawable.loading_svg, getTheme());</div><div class="line">mImgView.setImageDrawable(drawable);</div></pre></td></tr></table></figure>
 
 每次均后台完全杀死 App 重启 App，同时观察这个过程中内存使用情况，首先使用的较为复杂的测试图片如下：
-![](http://ww1.sinaimg.cn/mw690/a79b04ecgy1febrq56b90j205905mwed.jpg)
+![](https://ww1.sinaimg.cn/mw690/a79b04ecgy1febrq56b90j205905mwed.jpg)
 测试结果如下：
 
 格式 | 内存 | 时间(ms)
@@ -61,7 +61,7 @@ WebP | 总内存(Allocated + free)不变，空闲内存减少 0.9mb | 30
 SVG | 总内存(Allocated + free)不变，空闲内存减少 2.9mb | 374
 
 第二张测试图片如下：
-![](http://ww1.sinaimg.cn/large/a79b04ecgy1fecstryf3tj200x0180h8.jpg)
+![](https://ww1.sinaimg.cn/large/a79b04ecgy1fecstryf3tj200x0180h8.jpg)
 测试结果如下:
 
 格式 | 内存 | 时间(ms)
